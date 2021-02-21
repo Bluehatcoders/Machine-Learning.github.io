@@ -8,23 +8,23 @@
 
   <body>
     <!-- images to train the classifier -->
-    <img src="./longboard1.jpg" id="longboard1">
-    <img src="./longboard2.jpg" id="longboard2">
-    <img src="./longboard3.jpg" id="longboard3">
-    <img src="./longboard4.jpg" id="longboard4">
-    <img src="./longboard5.jpg" id="longboard5">
-    <img src="./longboard6.jpg" id="longboard6">
+    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*" id="dog1">
+    <img src="https://assets.rebelmouse.io/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpbWFnZSI6Imh0dHBzOi8vYXNzZXRzLnJibC5tcy8xMDcwNjM1MS9vcmlnaW4uanBnIiwiZXhwaXJlc19hdCI6MTY2NDI5MjM2OH0.u_y--qb3qcQPIP0Zwu9vEMQtgSYIR2W4rMjtISUanIw/img.jpg?width=1200&height=628" id="dog2">
+    <img src="https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg" id="dog3">
+    <img src="https://i.guim.co.uk/img/media/684c9d087dab923db1ce4057903f03293b07deac/205_132_1915_1150/master/1915.jpg?width=700&quality=85&auto=format&fit=max&s=56a2e35a42e37dcb12c3a7472c134443" id="dog4">
+    <img src="https://gd-prod.azureedge.net/-/media/project/guidedogs/guidedogsdotorg/images/sap/form-headshots/gd0269-576x432-headshotsmurphy.jpg" id="dog5">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfwl_iPUW1MlDriTXNQDoiutIuilmQOpITLg&usqp=CAU" id="dog6">
 
-    <img src="./skateboard1.jpg" id="skateboard1">
-    <img src="./skateboard2.jpg" id="skateboard2">
-    <img src="./skateboard3.jpg" id="skateboard3">
-    <img src="./skateboard4.jpg" id="skateboard4">
-    <img src="./skateboard5.jpg" id="skateboard5">
-    <img src="./skateboard6.jpg" id="skateboard6">
+    <img src=".https://cdn.britannica.com/91/181391-050-1DA18304/cat-toes-paw-number-paws-tiger-tabby.jpg" id="cat1">
+    <img src="https://media.npr.org/assets/img/2020/02/11/gettyimages-1161583037_wide-9557db6da5960c53f9b7c51da280d17adbb772cc-s800-c85.jpg" id="cat2">
+    <img src="https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png" id="cat3">
+    <img src="https://img.webmd.com/dtmcms/live/webmd/consumer_assets/site_images/article_thumbnails/reference_guide/cats_and_excessive_meowing_ref_guide/1800x1200_cats_and_excessive_meowing_ref_guide.jpg" id="cat4">
+    <img src="https://www.sciencemag.org/sites/default/files/styles/inline__450w__no_aspect/public/Madagascar_cats_1280x720.jpg?itok=Bny6DF9d" id="cat5">
+    <img src="https://www.telegraph.co.uk/content/dam/Pets/spark/royal-canin/cat-close-to-screen.jpg" id="cat6">
 
     <!-- simple test -->
-    <img src="./longboard.jpg" id="longboard">
-    <img src="./skateboard.jpg" id="skateboard">
+    <img src="http://cdn.akc.org/content/article-body-image/great_pyr_puppy_dog_pictures_.jpg" id="dog">
+    <img src="https://www.nationalgeographic.com/content/dam/news/2018/05/17/you-can-train-your-cat/02-cat-training-NationalGeographic_1484324.ngsversion.1526587209178.adapt.1900.1.jpg" id="cat">
     <script>
 
     let classifier
@@ -38,21 +38,21 @@
       classifier = featureExtractor.classification()
         
       // Retrain the network. You can use a for loop too :)
-      classifier.addImage(document.getElementById('longboard1') , 'longboard')
-      classifier.addImage(document.getElementById('longboard2') , 'longboard')
-      classifier.addImage(document.getElementById('longboard3') , 'longboard')
-      classifier.addImage(document.getElementById('longboard4') , 'longboard')
-      classifier.addImage(document.getElementById('longboard5') , 'longboard')
-      classifier.addImage(document.getElementById('longboard6') , 'longboard')
+      classifier.addImage(document.getElementById('dog1') , 'dog')
+      classifier.addImage(document.getElementById('dog2') , 'dog')
+      classifier.addImage(document.getElementById('dog3') , 'dog')
+      classifier.addImage(document.getElementById('dog4') , 'dog')
+      classifier.addImage(document.getElementById('dog5') , 'dog')
+      classifier.addImage(document.getElementById('dog6') , 'dog')
 
-      classifier.addImage(document.getElementById('skateboard1') , 'skateboard')
-      classifier.addImage(document.getElementById('skateboard2') , 'skateboard')
-      classifier.addImage(document.getElementById('skateboard3') , 'skateboard')
-      classifier.addImage(document.getElementById('skateboard4') , 'skateboard')
-      classifier.addImage(document.getElementById('skateboard5') , 'skateboard')
+      classifier.addImage(document.getElementById('cat1') , 'cat')
+      classifier.addImage(document.getElementById('cat2') , 'cat')
+      classifier.addImage(document.getElementById('cat3') , 'cat')
+      classifier.addImage(document.getElementById('cat4') , 'cat')
+      classifier.addImage(document.getElementById('cat5') , 'cat')
       
       //addImage accepts a third argument that is a callback.
-      classifier.addImage(document.getElementById('skateboard6') , 'skateboard', imagesLoaded)
+      classifier.addImage(document.getElementById('cat6') , 'cat', imagesLoaded)
     }
     
     // Function that will be called once the images are loaded
@@ -76,11 +76,11 @@
       console.log("train finished")
 
       // Examples to test the classifier
-      classifier.classify(document.getElementById('longboard'), (err, result) => {
-      console.log('is longboard?',result, result[0].label) ; // Should output 'longboard'
+      classifier.classify(document.getElementById('dog'), (err, result) => {
+      console.log('is dog?',result, result[0].label) ; // Should output 'longboard'
       });
-      classifier.classify(document.getElementById('skateboard'), (err, result) => {
-        console.log('is skateboard?', result, result[0].label); // Should output 'skateboard'
+      classifier.classify(document.getElementById('cat'), (err, result) => {
+        console.log('is cat?', result, result[0].label); // Should output 'skateboard'
       });
       // Saves two files model.json and model.weights.bin
       classifier.save()
