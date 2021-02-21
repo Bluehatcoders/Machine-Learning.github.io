@@ -1,34 +1,94 @@
-<!doctype html>
-<html>
-<head>
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started with ml5.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  </head>
 
-<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+  <body>
+    <!-- images to train the classifier -->
+    <img src="./dog1.jpg" id="dog1">
+    <img src="./dog2.jpeg" id="dog2">
+    <img src="./dog3.jpg" id="dog3">
+    <img src="./dog4.jpg" id="dog4">
+    <img src="./dog5.jpg" id="dog5">
+    <img src="./dog7.jpg" id="dog6">
 
-</head>
-<body>
+    <img src="./cat.jpg" id="cat1">
+    <img src="./testcat.jpg" id="cat2">
+    <img src="./cat3.jpg" id="cat3">
+    <img src="./cat4.jpg" id="cat4">
+    <img src="./cat5.jpg" id="cat5">
+    <img src="./cat6.png" id="cat6">
 
-<!-- Load TensorFlow.js. This is required to use MobileNet. -->
+    <!-- simple test -->
+    <img src="./testog.jpg" id="dog">
+    <img src="./cat2.jpg" id="cat">
+    <script>
 
-<!-- Replace this with your image. Make sure CORS settings allow reading the image! -->
-<img id="img" src="./cat2.jpg"></img>
+    let classifier
 
-<!-- Place your code in the script tag below. You can also use an external .js file -->
+    const featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
+    
+    // Once the model is loaded
+    function modelLoaded() {
+      console.log('Model Loaded!');
 
-<script>
-  // Notice there is no 'import' statement. 'mobilenet' and 'tf' is
-  // available on the index-page because of the script tag above.
+      classifier = featureExtractor.classification()
+        
+      // Retrain the network. You can use a for loop too :)
+      classifier.addImage(document.getElementById('dog1') , 'dog')
+      classifier.addImage(document.getElementById('dog2') , 'dog')
+      classifier.addImage(document.getElementById('dog3') , 'dog')
+      classifier.addImage(document.getElementById('dog4') , 'dog')
+      classifier.addImage(document.getElementById('dog5') , 'dog')
+      classifier.addImage(document.getElementById('dog6') , 'dog')
 
-  const img = document.getElementById('img');
+      classifier.addImage(document.getElementById('cat1') , 'cat')
+      classifier.addImage(document.getElementById('cat2') , 'cat')
+      classifier.addImage(document.getElementById('cat3') , 'cat')
+      classifier.addImage(document.getElementById('cat4') , 'cat')
+      classifier.addImage(document.getElementById('cat5') , 'cat')
+      
+      //addImage accepts a third argument that is a callback.
+      classifier.addImage(document.getElementById('cat6') , 'cat', imagesLoaded)
+    }
+    
+    // Function that will be called once the images are loaded
+    // It trains the model with the new categories
+    function imagesLoaded() { 
+      console.log("do train", classifier.hasAnyTrainedClass)
+      
+      // train argument is a callback that has as argument the current lossValue. 
+      // When lossValue is null, it means the training is finished
+      classifier.train( lossValue => {
+        console.log('Loss is', lossValue)
+        if (lossValue == null) {
+          trainFinished()
+        }
+      })
+    }
+    
+    // Called once the classifier is trained with the new classes
+    function trainFinished() {
+      // Get a prediction for that image
+      console.log("train finished")
 
-  // Load the model.
-  mobilenet.load().then(model => {
-    // Classify the image.
-    model.classify(img).then(predictions => {
-      console.log('Predictions: ');
-      console.log(predictions);
-    });
-  });
-</script>
-  </body>
+      // Examples to test the classifier
+      classifier.classify(document.getElementById('dog'), (err, result) => {
+      console.log('is dog?',result, result[0].label) ; // Should output 'longboard'
+      });
+      classifier.classify(document.getElementById('cat'), (err, result) => {
+        console.log('is cat?', result, result[0].label); // Should output 'skateboard'
+      });
+      // Saves two files model.json and model.weights.bin
+      classifier.save()
+      // This is the signal to tell puppeteer we are done with the  
+      done = document.getElementById("done").style.display="block"
+    }
+
+    </script>
+    <p id="done" style="display: none;">Done!</p>
+      </body>
 </html>
