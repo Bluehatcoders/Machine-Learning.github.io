@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Getting Started with ml5.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/ml5@0.5.0/dist/ml5.min.js"></script>
+  </head>
+
+  <body>
+    <!-- images to train the classifier -->
+    <img src="./ironman1.jpg" id="ironman1">
+    <img src="./ironman2.jpg" id="ironman2">
+    <img src="./ironman3.jpg" id="ironman3">
+    <img src="./ironman4.jpg" id="ironman4">
+    <img src="./ironman5.jpg" id="ironman5">
+
+    <img src="./thor1.jpg"  id="thor1">
+    <img src="./thor2.jpg" id="thor2">
+    <img src="./thor3.jpg" id="thor3">
+    <img src="./thor4.jpg" id="thor4">
+    <img src="./thor5.jpg" id="thor5">
+
+    <!-- simple test -->
+    <img src="./ironman.jpg" id="ironman">
+    <img src="./thor.jpg" id="thor">
+    <script>
+
+    let classifier
+
+    const featureExtractor = ml5.featureExtractor('MobileNet', modelLoaded);
+    
+    // Once the model is loaded
+    function modelLoaded() {
+      console.log('Model Loaded!');
+
+      classifier = featureExtractor.classification()
+        
+      // Retrain the network. You can use a for loop too :)
+      classifier.addImage(document.getElementById('ironman1') , 'Iron-Man')
+      classifier.addImage(document.getElementById('ironman2') , 'Iron-Man')
+      classifier.addImage(document.getElementById('ironman3') , 'Iron-Man')
+      classifier.addImage(document.getElementById('ironman4') , 'Iron-Man')
+      classifier.addImage(document.getElementById('ironman5') , 'Iron-Man')
+
+      classifier.addImage(document.getElementById('thor1') , 'Thor')
+      classifier.addImage(document.getElementById('thor2') , 'Thor')
+      classifier.addImage(document.getElementById('thor3') , 'Thor')
+      classifier.addImage(document.getElementById('thor4') , 'Thor')
+      
+      //addImage accepts a third argument that is a callback.
+      classifier.addImage(document.getElementById('thor5') , 'Thor', imagesLoaded)
+    }
+    
+    // Function that will be called once the images are loaded
+    // It trains the model with the new categories
+    function imagesLoaded() { 
+      console.log("do train", classifier.hasAnyTrainedClass)
+      
+      // train argument is a callback that has as argument the current lossValue. 
+      // When lossValue is null, it means the training is finished
+      classifier.train( lossValue => {
+        console.log('Loss is', lossValue)
+        if (lossValue == null) {
+          trainFinished()
+        }
+      })
+    }
+    
+    // Called once the classifier is trained with the new classes
+    function trainFinished() {
+      // Get a prediction for that image
+      console.log("train finished")
+
+      // Examples to test the classifier
+      classifier.classify(document.getElementById('dog'), (err, result) => {
+      console.log('Who is this?',result, result[0].label) ; 
+      });
+      classifier.classify(document.getElementById('cat'), (err, result) => {
+        console.log('Who is this?', result, result[0].label); 
+      });
+      // Saves two files model.json and model.weights.bin
+   
+      // This is the signal to tell puppeteer we are done with the  
+      done = document.getElementById("done").style.display="block"
+    }
+
+    </script>
+    <p id="done" style="display: none;">Done!</p>
+      </body>
+</html>
