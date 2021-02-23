@@ -45,10 +45,10 @@
 
       // Examples to test the classifier
       classifier.classify(document.getElementById('dog'), (err, result) => {
-      console.log('is dog?',result, result[0].label) ; // Should output 'longboard'
+      console.log('is dog?',result) ; // Should output 'longboard'
       });
       classifier.classify(document.getElementById('cat'), (err, result) => {
-        console.log('is cat?', result, result[0].label); // Should output 'skateboard'
+        console.log('is cat?', result); // Should output 'skateboard'
       });
       // Saves two files model.json and model.weights.bin
    
