@@ -8,11 +8,11 @@
 
   <body>
     <!-- images to train the classifier -->
-    <img src="./ironman1.jpg" id="ironman1">
-    <img src="./ironman2.jpg" id="ironman2">
-    <img src="./ironman3.jpg" id="ironman3">
-    <img src="./ironman4.jpg" id="ironman4">
-    <img src="./ironman5.jpg" id="ironman5">
+    <img src="./ironaman1.jpg" id="ironman1">
+    <img src="./ironaman2.jpg" id="ironman2">
+    <img src="./ironaman3.jpg" id="ironman3">
+    <img src="./ironaman4.jpg" id="ironman4">
+    <img src="./ironaman5.jpg" id="ironman5">
 
     <img src="./thor1.jpg"  id="thor1">
     <img src="./thor2.jpg" id="thor2">
@@ -72,10 +72,10 @@
       console.log("train finished")
 
       // Examples to test the classifier
-      classifier.classify(document.getElementById('dog'), (err, result) => {
+      classifier.classify(document.getElementById('ironman'), (err, result) => {
       console.log('Who is this?',result, result[0].label) ; 
       });
-      classifier.classify(document.getElementById('cat'), (err, result) => {
+      classifier.classify(document.getElementById('thor'), (err, result) => {
         console.log('Who is this?', result, result[0].label); 
       });
       // Saves two files model.json and model.weights.bin
