@@ -9,6 +9,18 @@
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
  <style>
+   .box {
+    display: block;
+    max-width: 355px;
+    height: 300px;
+    min-width: 355px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgb(0 0 0 / 12%), 0 1px 2px rgb(0 0 0 / 24%);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
    .button {
   background-color: #4CAF50;
   border: none;
@@ -48,7 +60,7 @@ function test(){
     // Classify the image.
     model.classify(img).then(predictions => {
       console.log('Predictions: ');
-      console.log(predictions);
+      console.log(predictions.[0].className);
     });
   });
 }
