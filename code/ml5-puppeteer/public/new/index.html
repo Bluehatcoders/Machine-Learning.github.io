@@ -61,6 +61,8 @@ function test(){
     model.classify(img).then(predictions => {
       console.log('Predictions: ');
       console.log(predictions[0].className);
+      console.log(predictions[1].className);
+      console.log(predictions[2].className);
     });
   });
 }
