@@ -43,7 +43,7 @@
 </head>
 <body>
 <!-- partial:index.partial.html -->
-<h1>Image-upload with preview</h1>
+<h1 id="this"></h1>
 <div class="wrapper">
  <div class="box">
     <img class="js--image-preview" id="img">
@@ -69,6 +69,7 @@ function test(){
       console.log(predictions[0].className);
       console.log(predictions[1].className);
       console.log(predictions[2].className);
+      document.getElementById("this").innerHTML = "This is " + predictions[0].className;
     });
   });
 }
