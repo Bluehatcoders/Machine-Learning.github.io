@@ -60,7 +60,7 @@ function test(){
     // Classify the image.
     model.classify(img).then(predictions => {
       console.log('Predictions: ');
-      console.log(predictions);
+      console.log(predictions[0].className);
     });
   });
 }
