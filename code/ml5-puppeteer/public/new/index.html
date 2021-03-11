@@ -6,14 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css'>
 <link rel='stylesheet' href='https://cdn.materialdesignicons.com/1.8.36/css/materialdesignicons.min.css'><link rel="stylesheet" href="./style.css">
-
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+ <style>
+   .button {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+  </style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <h1>Image-upload with preview</h1>
 <div class="wrapper">
  <div class="box">
-    <div class="js--image-preview"></div>
+    <div class="js--image-preview" id="img"></div>
     <div class="upload-options">
       <label>
         <input type="file" class="image-upload" accept="image/*" />
@@ -21,7 +36,23 @@
     </div>
   </div>
 </div>
-<!-- partial -->
+  <button class="button" onclick="test();">What is this</button>
+<script>
+  // Notice there is no 'import' statement. 'mobilenet' and 'tf' is
+  // available on the index-page because of the script tag above.
+
+  const img = document.getElementById('img');
+function test(){
+  // Load the model.
+  mobilenet.load().then(model => {
+    // Classify the image.
+    model.classify(img).then(predictions => {
+      console.log('Predictions: ');
+      console.log(predictions);
+    });
+  });
+}
+</script>
   <script  src="./script.js"></script>
 
 </body>
