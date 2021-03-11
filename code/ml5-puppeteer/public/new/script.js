@@ -13,7 +13,7 @@ function initImageUpload(box) {
         reader = new FileReader();
 
     reader.onload = function() {
-      thumb.style.backgroundImage = 'url(' + reader.result + ')';
+      thumb.src = reader.result;
     }
     reader.readAsDataURL(file);
     thumb.className += ' js--no-default';
