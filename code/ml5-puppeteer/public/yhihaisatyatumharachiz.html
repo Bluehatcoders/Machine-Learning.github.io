@@ -8,6 +8,7 @@
 </head>
 <body>
  <h1>Image classification using MobileNet and p5.js</h1>
+  <img src="cat.jpg" id="demo">
 <script type="text/javascript">
     // Copyright (c) 2019 ml5
 //
@@ -29,13 +30,11 @@ let imageModelURL = 'https://teachablemachine.withgoogle.com/models/YDJreukFg/';
     
 function preload() {
   classifier = ml5.imageClassifier(imageModelURL + 'model.json');
-     img = loadImage('cat.jpg');
+     img = document.getElementById("demo");
 }    
 
 function setup() {
-  createCanvas(400, 400);
   classifier.classify(img, gotResult);
-  image(img, 0, 0);
 }
 
 // A function to run when we get any errors and the results
