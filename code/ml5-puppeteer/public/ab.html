@@ -60,6 +60,7 @@
       // When lossValue is null, it means the training is finished
       classifier.train( lossValue => {
         console.log('Loss is', lossValue)
+        console.log("everything is going very well");
         if (lossValue == null) {
           trainFinished()
         }
@@ -69,7 +70,7 @@
     // Called once the classifier is trained with the new classes
     function trainFinished() {
       // Get a prediction for that image
-      console.log("train finished")
+      console.log("train finished now you can use you model sir!")
 
       // Examples to test the classifier
       classifier.classify(document.getElementById('ironman'), (err, result) => {
