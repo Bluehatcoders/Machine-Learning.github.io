@@ -10,7 +10,6 @@ const puppeteer = require('puppeteer');
   // if you want to trigger some function in the page use evaluate
   console.log(await page.evaluate('ml5.version')) // prints "0.5.0"
 
-  // Display browser console messages on screen
   page.on('console', msg => console.log('>', msg.text()));
  console.log("DONE!") 
   // This allows to save the model when classifier.save() is called.
