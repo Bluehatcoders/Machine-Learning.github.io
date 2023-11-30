@@ -13,7 +13,7 @@
   "author": "merlos",
   "license": "MIT",
   "dependencies": {
-    "puppeteer": "^5.4.0",
+    "puppeteer": "^18.2.0",
     "serve": "^11.3.2"
   }
 }
